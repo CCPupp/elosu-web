@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> osu! elo leaderboards </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/main.js"></script>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="flexbox.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <header>
+
+        <h1>elosu! (pre-alpha)</h1>
+        <nav>
+            <a href="index.html">
+                <button>Home</button>
+            </a>
+            <a href="pools.html">
+                <button>Rules / Mappools</button>
+            </a>
+            <a href="about.html">
+                <button>About / Help</button>
+            </a>
+            <a href="examplecalc.html">
+                <button>Example Elo Calculator</button>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="flexclass">
+            <section class="left">
+                <h2>Top Players</h2>
+                <div id="info"></div>
+            </section>
+            <section class="right">
+                <h2>User Search</h2>
+                Username:
+                <div>
+                    <input type="text" id="username" autocomplete="off">
+                    <a id="playersearch"></a>
+                </div>
+                <br>
+                <button id="submit" onclick="search()"> Submit </button>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

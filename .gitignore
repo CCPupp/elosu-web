@@ -73,3 +73,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+elocalc/calc.go
+elocalc/players.json
+*.bat
+*.pem
