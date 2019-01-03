@@ -7,41 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/scripts/main.js"></script>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="flexbox.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/flexbox.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#calc").on('click', function() {
-                var P1 = $("#P1").val();
-                var P2 = $("#P2").val();
-                $.ajax({
-                    url: "https://pupper.moe/calc",
-                    method: "GET",
-                    contentType: "application/x-www-form-urlencoded",
-                    data: {
-                        P1: P1,
-                        P2: P2
-                    },
-                    success: function(data) {
-                        $("#response").html(data);
-                    },
-                });
-            });
-            $("#clear").on('click', function() {
-                $.ajax({
-                    url: "https://pupper.moe/clear",
-                    method: "GET",
-                    success: function(data) {
-                        $("#response").html(data);
-                    },
-                });
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -76,7 +47,7 @@
                     </p>
                     <input type="text" id="P2" value="1200" class="elovals" /><br><br>
                 </form>
-                <button id="calc" type="">Call Go Code</button>
+                <button id="calc" type="">Run</button>
                 <button id="clear" type="submit">Clear</button>
                 <br><br>
                 <div id="response"></div>
@@ -88,7 +59,7 @@
                     <li>Both players, for now, are defaulted to being new to the sysytem.</li>
                 </ul>
                 <p>This calculator shows how much elo is gained and lost from a match. The nature of the system makes the matches more meaningful if the lesser ranked player beats the higher ranked player. The current system works around the number 75 wherein
-                    a player can only lose or gain a maximum of 75 points if the match results in a majoy upset. Closer matches will get a reduced value that is relative to the number 75.</p>
+                    a player can only lose or gain a maximum of 75 points if the match results in a majoy upset. Closer matches will get a reduced value that is relative to the number 75. After 10 matches the number will change to 25.</p>
             </section>
         </div>
 

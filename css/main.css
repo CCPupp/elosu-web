@@ -48,8 +48,11 @@ h1 {
 h2 {
     text-decoration: black;
     text-decoration-style: solid;
+    font-weight: bolder;
     padding-top: 2%;
     margin: 0%;
+    font-size: 180%;
+    text-decoration: underline;
 }
 
 section h2 {
@@ -107,4 +110,8 @@ button:hover {
 button:active {
     border-top-color: #1b435e;
     background: #1b435e;
+}
+
+div {
+    font-weight: bold;
 }

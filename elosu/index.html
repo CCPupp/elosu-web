@@ -7,14 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/scripts/main.js"></script>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="flexbox.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/flexbox.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
+
+<script>
+    var tops = $("#tops").val();
+    $.ajax({
+        url: "/top",
+        method: "GET",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            tops: tops
+        },
+        success: function(data) {
+            $("#response").html(data);
+        },
+    });
+</script>
 
 <body>
     <header>
@@ -40,7 +54,7 @@
         <div class="flexclass">
             <section class="left">
                 <h2>Top Players</h2>
-                <div id="info"></div>
+                <div id="response"></div>
             </section>
             <section class="right">
                 <h2>User Search</h2>
@@ -50,7 +64,7 @@
                     <a id="playersearch"></a>
                 </div>
                 <br>
-                <button id="submit" onclick="search()"> Submit </button>
+                <button id="top"> Submit </button>
             </section>
         </div>
     </main>

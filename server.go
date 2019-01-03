@@ -2,11 +2,16 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"math"
 	"net/http"
 	"strconv"
+	"strings"
+	"time"
+
+	_ "github.com/bmizerany/pq"
 
 	"github.com/kabukky/httpscerts"
 )
@@ -19,11 +24,21 @@ var (
 	name1, name2                 string
 )
 
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "Pupper"
+	password = "x"
+	dbname   = "elosu_db"
+)
+
 func main() {
 	// Check if the cert files are available.
 	httpscerts.Check("certs/server.pem", "certs/key.pem")
 	http.Handle("/elosu/", http.StripPrefix("/elosu/", http.FileServer(http.Dir("elosu"))))
 	http.Handle("/home/", http.StripPrefix("/home/", http.FileServer(http.Dir("home"))))
+	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("scripts"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// If root directory is called in /elosu/
 		if r.URL.Path[1:] == "elosu" {
@@ -52,14 +67,38 @@ func main() {
 		println(output[24:28], output[53:57])
 		fmt.Fprintln(w, output)
 	})
+	//outputs the top 10 players on the site
+	http.HandleFunc("/top", func(w http.ResponseWriter, r *http.Request) {
+		var players = getTop()
+		var count = 0
+		var temp = ""
+		for count < 10 {
+			temp = players[count]
+			if temp != "" {
+				stringarray := strings.Split(temp, ",")
+				a, b := stringarray[0], stringarray[1]
+				final := fmt.Sprintf("<div id='player'> %20s : %s </div>", a, b)
+				fmt.Fprintln(w, final)
+				fmt.Fprintln(w, "<br>")
+				count++
+			} else {
+				count++
+			}
+		}
+	})
 	// Clears the output
 	http.HandleFunc("/clear", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "")
 	})
-	// Serves the webpage
-	errhttps := http.ListenAndServeTLS(":443", "certs/server.pem", "certs/key.pem", nil)
-	if errhttps != nil {
-		log.Fatal("Web server (HTTPS): ", errhttps)
+	//Serves the webpage
+	// errhttps := http.ListenAndServeTLS(":8080", "certs/server.pem", "certs/key.pem", nil)
+	// if errhttps != nil {
+	// 	log.Fatal("Web server (HTTPS): ", errhttps)
+	// }
+
+	errhttp := http.ListenAndServe(":8080", nil)
+	if errhttp != nil {
+		log.Fatal("Web server (HTTPS): ", errhttp)
 	}
 
 }
@@ -119,3 +158,69 @@ func calcK(winner, player1elo, player2elo, player1pc, player2pc int, name1, name
 }
 
 // ********** STOP ELO CALCULATOR **********
+
+//Adds new user to the database
+func newUser(id string, name string, elo string) {
+
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	//Pings to check the connection
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	//Test to add my user to the db
+	sqlStatement := "INSERT INTO player (playerid, name, elo, wins, losses, joindate) VALUES (" + id + ", '" + name + "', " + elo + ", 0, 0, current_timestamp)"
+	_, err = db.Exec(sqlStatement)
+	checkErr(err)
+
+}
+
+func getTop() [10]string {
+
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
+	checkErr(err)
+	defer db.Close()
+	//Pings to check the connection
+	err = db.Ping()
+	checkErr(err)
+
+	//Test to read the users from the db
+	rows, err := db.Query("SELECT * FROM player ORDER BY elo DESC")
+	checkErr(err)
+
+	var top10 [10]string
+	var count = 0
+	for rows.Next() {
+		var playerid int
+		var name string
+		var elo int
+		var wins int
+		var losses int
+		var joindate time.Time
+		err = rows.Scan(&playerid, &name, &elo, &wins, &losses, &joindate)
+		checkErr(err)
+		// fmt.Println("playerid | name | elo | wins | losses | joindate ")
+		// fmt.Printf("%v | %v | %v | %v | %v | %v )\n", playerid, name, elo, wins, losses, joindate)
+		top10[count] = fmt.Sprintf("%v, %v", name, elo)
+		count++
+	}
+	return top10
+
+}
+
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
