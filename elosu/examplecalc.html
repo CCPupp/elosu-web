@@ -15,28 +15,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
-<body>
-    <header>
+<header>
+    <nav>
+        <img src="/images/osu-small.png">
+        <a href="index.html">
+            <button>Home</button>
+        </a>
+        <a href="pools.html">
+            <button>Rules / Mappools</button>
+        </a>
+        <a href="about.html">
+            <button>About / Help</button>
+        </a>
+        <a href="examplecalc.html">
+            <button>Example Elo Calculator</button>
+        </a>
+    </nav>
+</header>
 
-        <h1>elosu! (pre-alpha)</h1>
-        <nav>
-            <a href="index.html">
-                <button>Home</button>
-            </a>
-            <a href="pools.html">
-                <button>Rules / Mappools</button>
-            </a>
-            <a href="about.html">
-                <button>About / Help</button>
-            </a>
-            <a href="examplecalc.html">
-                <button>Example Elo Calculator</button>
-            </a>
-        </nav>
-    </header>
+<body>
     <main>
         <div class="flexclass">
-            <section class="left">
+            <section class="first">
                 <form>
                     <p>
                         <h3>Player 1 (Winner)</h3>
@@ -52,7 +52,7 @@
                 <br><br>
                 <div id="response"></div>
             </section>
-            <section class="right">
+            <section class="second">
                 <h2>How it Works:</h2>
                 <ul>
                     <li>Player 1 will always win.</li>

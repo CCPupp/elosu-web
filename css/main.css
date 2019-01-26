@@ -1,19 +1,28 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
 header {
     text-align: center;
-    background-image: url("bg.png");
     font-weight: bold;
-    padding-top: 1%;
     font-family: "Alfa Slab One", cursive;
 }
 
 main {
-    background-image: url("bg.png");
     min-height: 500px;
     max-height: 100%;
+    background-color: rgb(248, 254, 255);
 }
 
 header nav a {
     text-decoration: none;
+}
+
+nav a button {
+    width: 20%;
 }
 
 ol {
@@ -22,18 +31,17 @@ ol {
 
 body {
     font-family: "Open Sans", sans-serif;
-    margin-left: 5%;
-    margin-right: 5%;
-    height: 100%;
-    background-image: url("bg.png");
+    color: black;
 }
 
 html {
-    min-height: 150%;
+    background-color: #35324c;
 }
 
 main {
     padding: 3%;
+    margin-right: 8%;
+    margin-left: 8%;
 }
 
 footer {
@@ -42,34 +50,31 @@ footer {
 
 h1 {
     font-size: 50px;
-    padding-bottom: 1%;
+    color: #90caf9;
 }
 
 h2 {
     text-decoration: black;
     text-decoration-style: solid;
     font-weight: bolder;
-    padding-top: 2%;
-    margin: 0%;
     font-size: 180%;
     text-decoration: underline;
+    color: #000000;
 }
 
 section h2 {
     padding-bottom: 2%;
 }
 
-.left,
-.right {
+.first,
+.second {
     width: 40%;
     margin: 3%;
-    border: blue;
     border-style: none;
     padding: 1%;
 }
 
 section {
-    background-image: url("bg.png");
     height: 500px;
 }
 
@@ -78,23 +83,25 @@ footer {
 }
 
 nav {
-    padding: 1%;
+    background-color: #222222;
+    overflow: auto;
+    color: rgb(229, 228, 255);
 }
 
 button {
-    border: 1px solid #edf6e1;
+    border: 1px solid #222222;
     background: #d36f53;
-    background: -webkit-gradient( linear, left top, left bottom, from(#edf6e1), to(#e6e1e1));
-    background: -webkit-linear-gradient(top, #edf6e1, #e6e1e1);
-    background: -moz-linear-gradient(top, #edf6e1, #e6e1e1);
-    background: -ms-linear-gradient(top, #edf6e1, #e6e1e1);
-    background: -o-linear-gradient(top, #edf6e1, #e6e1e1);
+    background: -webkit-gradient( linear, left top, left bottom, from(#222222), to(#222222));
+    background: -webkit-linear-gradient(top, #222222, #222222);
+    background: -moz-linear-gradient(top, #222222, #222222);
+    background: -ms-linear-gradient(top, #222222, #222222);
+    background: -o-linear-gradient(top, #222222, #222222);
     padding: 6.5px 13px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
     text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
-    color: #000000;
+    color: whitesmoke;
     font-size: 21px;
     font-family: "Lucida Grande", Helvetica, Arial, Sans-Serif;
     text-decoration: none;
@@ -114,4 +121,22 @@ button:active {
 
 div {
     font-weight: bold;
+}
+
+img {
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #c3cad8;
 }
