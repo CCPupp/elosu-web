@@ -23,21 +23,21 @@ var (
 	name1, name2                 string
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "Pupper"
-	password = "x"
-	dbname   = "elosu_db"
-)
-
 // const (
 // 	host     = "localhost"
 // 	port     = 5432
-// 	user     = "elosu"
+// 	user     = "Pupper"
 // 	password = "x"
-// 	dbname   = "elosu"
+// 	dbname   = "elosu_db"
 // )
+
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "elosu"
+	password = "x"
+	dbname   = "elosu"
+)
 
 func main() {
 	// Check if the cert files are available.
@@ -99,15 +99,15 @@ func main() {
 		fmt.Fprintln(w, "")
 	})
 	//Serves the webpage
-	// errhttps := http.ListenAndServeTLS(":8080", "certs/server.pem", "certs/key.pem", nil)
-	// if errhttps != nil {
-	// 	log.Fatal("Web server (HTTPS): ", errhttps)
-	// }
-
-	errhttp := http.ListenAndServe(":8080", nil)
-	if errhttp != nil {
-		log.Fatal("Web server (HTTPS): ", errhttp)
+	errhttps := http.ListenAndServeTLS(":443", "certs/server.pem", "certs/key.pem", nil)
+	if errhttps != nil {
+		log.Fatal("Web server (HTTPS): ", errhttps)
 	}
+
+	// errhttp := http.ListenAndServe(":8080", nil)
+	// if errhttp != nil {
+	// 	log.Fatal("Web server (HTTPS): ", errhttp)
+	// }
 
 }
 
