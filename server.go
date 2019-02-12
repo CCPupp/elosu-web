@@ -27,11 +27,11 @@ var (
 
 // Populates the database information
 const (
-	host     = lib.Host
-	port     = lib.Port
-	user     = lib.User
-	password = lib.Password
-	dbname   = lib.Dbname
+	host     = lib.ElosuHost
+	port     = lib.ElosuPort
+	user     = lib.ElosuUser
+	password = lib.ElosuPassword
+	dbname   = lib.ElosuDbname
 )
 
 func main() {
@@ -94,7 +94,7 @@ func main() {
 		fmt.Fprintln(w, "")
 	})
 
-	if lib.Testing {
+	if lib.ElosuTesting {
 		errhttp := http.ListenAndServe(":8080", nil)
 		if errhttp != nil {
 			log.Fatal("Web server (HTTPS): ", errhttp)
