@@ -12,6 +12,8 @@ import (
 
 	_ "github.com/bmizerany/pq"
 
+	"lib"
+
 	"github.com/kabukky/httpscerts"
 )
 
@@ -23,20 +25,13 @@ var (
 	name1, name2                 string
 )
 
-// const (
-// 	host     = "localhost"
-// 	port     = 5432
-// 	user     = "Pupper"
-// 	password = "x"
-// 	dbname   = "elosu_db"
-// )
-
+// Populates the database information
 const (
-	host     = "localhost"
-	port     = 5432
-	user     = "elosu"
-	password = "x"
-	dbname   = "elosu"
+	host     = lib.Host
+	port     = lib.Port
+	user     = lib.User
+	password = lib.Password
+	dbname   = lib.Dbname
 )
 
 func main() {
@@ -98,16 +93,19 @@ func main() {
 	http.HandleFunc("/clear", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "")
 	})
-	//Serves the webpage
-	errhttps := http.ListenAndServeTLS(":443", "certs/server.pem", "certs/key.pem", nil)
-	if errhttps != nil {
-		log.Fatal("Web server (HTTPS): ", errhttps)
-	}
 
-	// errhttp := http.ListenAndServe(":8080", nil)
-	// if errhttp != nil {
-	// 	log.Fatal("Web server (HTTPS): ", errhttp)
-	// }
+	if lib.Testing {
+		errhttp := http.ListenAndServe(":8080", nil)
+		if errhttp != nil {
+			log.Fatal("Web server (HTTPS): ", errhttp)
+		}
+	} else {
+		//Serves the webpage
+		errhttps := http.ListenAndServeTLS(":443", "certs/server.pem", "certs/key.pem", nil)
+		if errhttps != nil {
+			log.Fatal("Web server (HTTPS): ", errhttps)
+		}
+	}
 
 }
 
@@ -194,6 +192,9 @@ func getTop() [10]string {
 		// fmt.Printf("%v | %v | %v | %v | %v | %v )\n", playerid, name, elo, wins, losses, joindate)
 		top10[count] = fmt.Sprintf("%v, %v", name, elo)
 		count++
+		if count == 10 {
+			break
+		}
 	}
 	return top10
 
