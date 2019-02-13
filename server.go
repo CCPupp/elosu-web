@@ -80,7 +80,7 @@ func main() {
 			if temp != "" {
 				stringarray := strings.Split(temp, ",")
 				a, b := stringarray[0], stringarray[1]
-				final := fmt.Sprintf("<tr> <th>%d</th> <th>%20s</th> <th>%s</th> </tr>", count, a, b)
+				final := fmt.Sprintf("<tr> <th>%d</th> <th>%20s</th> <th>%s</th> </tr>", count+1, a, b)
 				fmt.Fprintln(w, final)
 				fmt.Fprintln(w, "<br>")
 				count++
