@@ -27,11 +27,11 @@ var (
 
 // Populates the database information
 const (
-	host     = lib.Host
-	port     = lib.Port
-	user     = lib.User
-	password = lib.Password
-	dbname   = lib.Dbname
+	host     = lib.ElosuHost
+	port     = lib.ElosuPort
+	user     = lib.ElosuUser
+	password = lib.ElosuPassword
+	dbname   = lib.ElosuDbname
 )
 
 func main() {
@@ -80,7 +80,7 @@ func main() {
 			if temp != "" {
 				stringarray := strings.Split(temp, ",")
 				a, b := stringarray[0], stringarray[1]
-				final := fmt.Sprintf("<tr> <th>%20s</th> <th>%s</th> </tr>", a, b)
+				final := fmt.Sprintf("<tr> <th>%d</th> <th>%20s</th> <th>%s</th> </tr>", count, a, b)
 				fmt.Fprintln(w, final)
 				fmt.Fprintln(w, "<br>")
 				count++
@@ -94,7 +94,7 @@ func main() {
 		fmt.Fprintln(w, "")
 	})
 
-	if lib.Testing {
+	if lib.ElosuTesting {
 		errhttp := http.ListenAndServe(":8080", nil)
 		if errhttp != nil {
 			log.Fatal("Web server (HTTPS): ", errhttp)
