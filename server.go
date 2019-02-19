@@ -19,10 +19,8 @@ import (
 
 // Variables used by the Elo Calculator
 var (
-	player1elo, player1pc        int
-	player2elo, player2pc        int
-	winner, finallelo, finalwelo int
-	name1, name2                 string
+	player1elo, player1pc, player2elo, player2pc, winner, finallelo, finalwelo int
+	name1, name2                                                               string
 )
 
 // Populates the database information
