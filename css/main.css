@@ -159,15 +159,3 @@ tr:nth-child(even) {
     overflow: hidden;
     background-color: #f1f1f1;
 }
-
-.flex-container {
-    display: flex;
-}
-
-.flex-grow-1 {
-    flex-grow: 1;
-}
-
-.flex-grow-2 {
-    flex-grow: 2;
-}

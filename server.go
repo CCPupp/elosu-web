@@ -73,13 +73,13 @@ func main() {
 		var players = getTop()
 		var count = 0
 		var temp = ""
-		fmt.Fprintln(w, "<tr><th>Rank</th><th>Username</th><th>elo</th></tr>")
+		fmt.Fprintln(w, "<tr><th>Rank</th><th>Username</th><th>elo</th><th>Wins</th></tr>")
 		for count < 10 {
 			temp = players[count]
 			if temp != "" {
 				stringarray := strings.Split(temp, ",")
-				a, b := stringarray[0], stringarray[1]
-				final := fmt.Sprintf("<tr> <td>%d</td> <td>%20s</td> <td>%s</td> </tr>", count+1, a, b)
+				name, elo, wins := stringarray[0], stringarray[1], stringarray[2]
+				final := fmt.Sprintf("<tr> <td>%d</td> <td>%20s</td> <td>%s</td> <td>%s</td> </tr>", count+1, name, elo, wins)
 
 				fmt.Fprintln(w, final)
 				fmt.Fprintln(w, "<br>")
@@ -178,7 +178,7 @@ func getTop() [10]string {
 	checkErr(err)
 
 	//Test to read the users from the db
-	rows, err := db.Query("SELECT name, elo FROM player ORDER BY elo DESC")
+	rows, err := db.Query("SELECT name, elo, wins FROM player ORDER BY elo DESC")
 	checkErr(err)
 
 	var top10 [10]string
@@ -186,11 +186,10 @@ func getTop() [10]string {
 	for rows.Next() {
 		var name string
 		var elo int
-		err = rows.Scan(&name, &elo)
+		var wins int
+		err = rows.Scan(&name, &elo, &wins)
 		checkErr(err)
-		// fmt.Println("playerid | name | elo | wins | losses | joindate ")
-		// fmt.Printf("%v | %v | %v | %v | %v | %v )\n", playerid, name, elo, wins, losses, joindate)
-		top10[count] = fmt.Sprintf("%v, %v", name, elo)
+		top10[count] = fmt.Sprintf("%v, %v, %v", name, elo, wins)
 		count++
 		if count == 10 {
 			break

@@ -2,3 +2,12 @@
     display: flex;
     align-content: center;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-object {
+    margin: 2%;
+}
