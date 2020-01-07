@@ -33,10 +33,6 @@ body {
     color: black;
 }
 
-html {
-    background-color: #35324c;
-}
-
 main {
     padding: 3%;
     margin-right: 8%;
@@ -87,7 +83,7 @@ nav {
     color: rgb(229, 228, 255);
 }
 
-button {
+nav button {
     border: 1px solid #222222;
     background: #d36f53;
     background: -webkit-gradient( linear, left top, left bottom, from(#222222), to(#222222));
@@ -95,41 +91,45 @@ button {
     background: -moz-linear-gradient(top, #222222, #222222);
     background: -ms-linear-gradient(top, #222222, #222222);
     background: -o-linear-gradient(top, #222222, #222222);
-    padding: 6.5px 13px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
     text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
     color: whitesmoke;
-    font-size: 21px;
+    font-size: 200%;
     font-family: "Lucida Grande", Helvetica, Arial, Sans-Serif;
     text-decoration: none;
     vertical-align: middle;
+    line-height: 80px;
 }
 
-button:hover {
+nav button:hover {
     border-top-color: #205e87;
     background: #205e87;
     color: #ccc;
 }
 
-button:active {
+nav button:active {
     border-top-color: #1b435e;
     background: #1b435e;
 }
 
 img {
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: -20px;
 }
 
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 th,
 td {
     text-align: left;
     padding: 8px;
+    border: 1px solid black;
+    min-width: 20px;
 }
 
 tr:nth-child(even) {
@@ -146,15 +146,28 @@ tr:nth-child(even) {
     text-align: left;
     outline: none;
     font-size: 15px;
-  }
-  
-  .active, .collapsible:hover {
+}
+
+.active,
+.collapsible:hover {
     background-color: #555;
-  }
-  
-  .content {
+}
+
+.content {
     padding: 0 18px;
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
-  }
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.flex-grow-2 {
+    flex-grow: 2;
+}
