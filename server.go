@@ -19,10 +19,8 @@ import (
 
 // Variables used by the Elo Calculator
 var (
-	player1elo, player1pc        int
-	player2elo, player2pc        int
-	winner, finallelo, finalwelo int
-	name1, name2                 string
+	player1elo, player1pc, player2elo, player2pc, winner, finallelo, finalwelo int
+	name1, name2                                                               string
 )
 
 // Populates the database information
@@ -75,12 +73,14 @@ func main() {
 		var players = getTop()
 		var count = 0
 		var temp = ""
+		fmt.Fprintln(w, "<tr><th>Rank</th><th>Username</th><th>elo</th></tr>")
 		for count < 10 {
 			temp = players[count]
 			if temp != "" {
 				stringarray := strings.Split(temp, ",")
 				a, b := stringarray[0], stringarray[1]
-				final := fmt.Sprintf("<tr> <th>%d</th> <th>%20s</th> <th>%s</th> </tr>", count+1, a, b)
+				final := fmt.Sprintf("<tr> <td>%d</td> <td>%20s</td> <td>%s</td> </tr>", count+1, a, b)
+
 				fmt.Fprintln(w, final)
 				fmt.Fprintln(w, "<br>")
 				count++
